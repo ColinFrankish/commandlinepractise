@@ -1,0 +1,126 @@
+More advanced command line notes
+
+Piping. the Pipe symbol   |  (shift \) takes the output of the command on the left side of the argument and passes it to the input of the command on the right.
+
+e.g.  cat <file> |  <newfile or command>  
+
+so the 'new file or command' is now holding the output of what was the output of the left side of the command line.  Makes sense???
+
+cat <file.txt>  >   <newfile>  writes the output of the left side to the right.
+You can create a new file on the right with the out put of the left side just by giving it a name
+
+Wildcards 
+you can use wildcards  the ‘*’ symbol to refine your search in lists. 
+e.g. ls *.txt will find all files ENDING in .txt
+ls new*   will find all beginning with ‘new’
+ls *m* will find all files with an ‘m’ in them.
+the position of * means anything ending or beginning or just that. 
+
+FIND - refined searching 
+find . -name *.txt -print   - find me all files with this name(directory or file) ending in .txt and print them!
+
+
+
+GREP
+eg. grep binary *.txt
+The "grep" command takes two parameters: the first is what you want to search for (in this case, the word "binary") and the second is what files you want to search through (in this case, the files ending in .txt).
+
+search for a letter in a specific file
+
+grep a <filename>    - searches for all lines in file with letter ‘a’ in them. 
+
+
+
+
+
+
+
+grep is taking a regular expression rather than a string and searching for it. 
+
+wc ‘wc’ CAN mean word count. simply wc filename
+
+gives 3 values number of lines, words, characters. In that order.
+********** example of piping using the above 3 functions ***********
+
+find . -name “*.txt” -print | grep read me | wc -l   
+
+the info is being piped along and changed/refined each time. 
+
+so to find all processes running on system (ps x) pull the google files running (grep Google) =, count them (wc -l), then print to a file (> google.txt
+
+ps x | Google | wc -l > Google.txt
+
+
+
+ PERMISSIONS
+
+users groups others  -3 groups. u,g,o
+read write execute (r,w,x)  - 3 permissions
+
+ls -l will show the list of files/direct with relevant permissions on the left as 3 letter codes. 
+
+can change permissions like this 
+
+chmod a-rx readme.txt - means change group all(a) remove read and execute permissions on the file readme.txt
+
+SHEBANG
+If you try and run the file ./hello.rb straight from the command line (without doing 'ruby hello.rb' and invoking ruby to run it). It won’t work. cos the machine doesn’t know which program this is. 
+sO you create a shebang - you really do. 
+it is the entry   "#! URL from ruby latest version on machine”
+before the code in the hello.rb file. e.g.
+
+#!/Users/Colin/.rvm/rubies/ruby-2.1.0-rc1/bin/ruby
+puts “hello world “ etc etc
+
+#!/usr/bin/env ruby    is a shortcut which will find latest version of Ruby
+and run it in for the shebang.
+
+Environment variables
+
+the environment is a series of things the computer is aware of use ‘env’ to check all paths that are checked by the machine when code is inputted.
+
+export DAY=Monday  - this creates the new environment variable DAY set to monday
+echo $DAY - prints contents of DAY. but this won’t be remembered in a new window unless you export it to the bash profile 
+
+echo “export DAY=Monday" >> ~/.bash_profile
+
+
+if you now open a new terminal and run echo $DAY it now exists.
+Check env to see the full profile
+
+you can also use echo in a pipeline for command substitution
+
+env | grep ^T | echo Overall count #(wc -l) > t-vars.count
+
+this will run env
+grep gets all files starting with T
+echo writes ‘overall count then string interpolation takes the 
+output from the previous pipe and counts them (wc-l) then puts 
+the phrase ‘Overall count 5 into file t-vars.count. 
+
+Got it? good!
+
+
+Processes
+ps will tell you what you launched. 
+ps x will tell you all progs running on system
+
+if you wanted to just pull the bash processes, then count them:
+ps x | grep bash | wc -l
+
+
+
+vim
+this is a text editor basically on all machines. it has no GUI, so it purely exists in the command line. here’s the basics
+
+create a file -  vi <filename>
+this will show you an empty file IN THE SHELL 
+3 basic commands i = insert (text or command or whatever)
+     o = open new line after the previous
+     dd= delete current line. 
+
+
+
+
+
+

@@ -1,2 +1,0 @@
-mv command. Is used to move a file or a directory. It can also just rename a file if you dont 
-specify a new directory to move it to. eg mv old new    - will just change the name of old to new.
